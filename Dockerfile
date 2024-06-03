@@ -1,5 +1,5 @@
 # Use
-FROM Python
+FROM python
 
 # Set the working directory in the container
 WORKDIR /app
