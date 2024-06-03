@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage ('poll scm') {
+            steps {
+                checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/shubhamkumar177/javaweb.git']])
+            }
+        }
+        stage ('build') {
+            steps {
+                'docker build -t 137855620426.dkr.ecr.ap-south-1.amazonaws.com/example .'
+            }
+        }
+        stage ('push to ecr') {
+            steps {
+                sh 'docker push 137855620426.dkr.ecr.ap-south-1.amazonaws.com/example'
+            }
+        }
+        stage ('deploy docker container') {
+            steps {
+                sh 'docker stop example'
+                sh 'docker rm example'
+                sh 'docker run --name example -itd -p 3000:3000 137855620426.dkr.ecr.ap-south-1.amazonaws.com/example' 
+            }
+        }
+    }
+}
