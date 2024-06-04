@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: example
+  template:
+    metadata:
+      name: my-pod
+      labels:
+        app: example
+    spec:
+      containers:
+      - name: my-con
+        image: nginx
+        ports:
+        - containerPort: 3000
