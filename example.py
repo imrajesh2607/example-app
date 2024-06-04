@@ -1,10 +1,10 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Welcome to the Sum Calculator!'
+    return render_template('index.html')
 
 @app.route('/sum', methods=['POST'])
 def sum_numbers():
