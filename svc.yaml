@@ -5,9 +5,8 @@ metadata:
 spec:
   selector:
     app: example
-  type: NodePort
+  type: LoadBalancer
   ports:
     - protocol: TCP
-      nodePort: 31000
       port: 80
       targetPort: 3000
